@@ -1,6 +1,21 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addToCart, removeFromCart } from '../store/cart-slice';
+
+
 
 const Product = ({product}) => {
+
+    const {cart} = useSelector(state => state);
+
+    const dispaatch = useDispatch();
+function handleAddToCart(){
+    dispaatch(addToCart(product))
+}
+const handleRemoveCart =() => {
+    console.log('removed')
+    dispaatch(removeFromCart(product))
+}
   return (
     <div>
     <div className='border-red-900 border-2 gap-3 p-4 h-[360px] group flex mt-10 ml-5
@@ -14,7 +29,9 @@ const Product = ({product}) => {
         </div>
         <div className='flex flex-col items-center justify-center w-full mt-3 '>
             <p>{product?.price}</p>
-            <button className='bg-red-950 text-white border-2 rounded-lg font-bold p-4'>Add to Cart</button>
+            <button onClick={cart.some(item => item.id === product.id) ? handleRemoveCart : handleAddToCart} className='bg-red-950 text-white border-2 rounded-lg font-bold p-4'>{
+                cart.some(item => item.id === product.id) ? 'Remove From Cart' : 'Add to Cart'
+                }</button>
         </div>
       </div>
     </div>
