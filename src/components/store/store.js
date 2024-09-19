@@ -1,4 +1,4 @@
-const { configureStore } = require("@reduxjs/toolkit");
+import { configureStore } from "@reduxjs/toolkit"; // Changed require to import
 import cartReducer from './cart-slice'
 
 
